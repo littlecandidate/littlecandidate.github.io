@@ -1,236 +1,197 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-HK">
+<html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Little Candidate | 香港首創 AI 升小面試培訓平台</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Little Candidate 小小面試生 | 香港首個 AI 名校面試訓練 App</title>
     <style>
         :root {
-            --primary-color: #FF8C42; 
-            --secondary-color: #4A90E2; 
-            --background-light: #FDF9F3;
-            --text-dark: #333;
-            --white: #ffffff;
+            --primary-blue: #1A365D; 
+            --accent-orange: #F97316; 
+            --light-bg: #F8FAFC;
+            --text-main: #334155;
         }
-
         body {
-            font-family: 'Nunito', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
             margin: 0;
             padding: 0;
-            background-color: var(--background-light);
-            color: var(--text-dark);
+            background-color: var(--light-bg);
+            line-height: 1.6;
         }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 10%;
-            background: var(--white);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--secondary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo img { height: 40px; }
-        .logo span { color: var(--primary-color); }
-
-        .btn-trial {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        /* Hero Section */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Hero Section 加入 Nutty */
         .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #2563EB 100%);
+            color: white;
             text-align: center;
-            padding: 60px 10%;
-            background: linear-gradient(180deg, #ffffff 0%, #fdf9f3 100%);
+            padding: 60px 20px 80px 20px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
         }
-
-        .hero h1 {
-            font-size: 42px;
-            color: var(--secondary-color);
-            margin-bottom: 20px;
+        .hero-mascot {
+            width: 180px; /* 控制 Nutty 圖片大小 */
+            height: auto;
+            margin-bottom: 15px;
+            /* 加入輕微上下浮動動畫，令 Nutty 更生動 */
+            animation: float 3s ease-in-out infinite; 
         }
-
-        .nutty-main {
-            width: 280px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
-            animation: float 3s ease-in-out infinite;
-        }
-
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
 
-        /* Features */
-        .features {
+        .hero h1 { font-size: 2.5em; margin-bottom: 10px; margin-top: 0; color: #FBBF24; }
+        .hero p { font-size: 1.2em; max-width: 700px; margin: 0 auto 30px auto; opacity: 0.9; }
+        .btn-waitlist {
+            background-color: var(--accent-orange);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .btn-waitlist:hover { background-color: #EA580C; }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2em;
+            color: var(--primary-blue);
+            margin: 60px 0 30px 0;
+        }
+
+        /* Features Grid */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 60px 10%;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
         }
-
-        .feature-card {
+        .card {
             background: white;
             padding: 30px;
-            border-radius: 30px;
-            text-align: center;
-            transition: transform 0.3s;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--accent-orange);
         }
-
-        .feature-card:hover { transform: scale(1.03); }
-
-        .nutty-icon { width: 80px; margin-bottom: 15px; }
-
-        /* CTA Section with Rap Nutty */
-        .rap-section {
-            background: #FFF0E6;
-            padding: 60px 10%;
-            display: flex;
-            align-items: center;
-            border-radius: 50px;
-            margin: 40px 5%;
-            gap: 40px;
-        }
-
-        .rap-content { flex: 1; }
-        .rap-img { width: 220px; }
-
-        /* Pricing */
-        .pricing {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 80px 10%;
-            text-align: center;
-        }
-
-        .price-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .price-card {
+        .card h3 { color: var(--primary-blue); margin-top: 0; }
+        
+        /* Trust / Team Section */
+        .trust-section {
             background: white;
-            color: var(--text-dark);
             padding: 40px;
-            border-radius: 30px;
-            width: 280px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 50px;
         }
+        .trust-section p { max-width: 800px; margin: 0 auto; }
 
-        .price-card.featured {
-            border: 4px solid var(--primary-color);
-            transform: scale(1.05);
+        /* Pricing Section */
+        .pricing-box {
+            background: #EFF6FF;
+            border: 2px solid #BFDBFE;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto 60px auto;
         }
+        .pricing-box h3 { font-size: 1.8em; color: var(--primary-blue); margin-top: 0; }
+        .price { font-size: 3em; font-weight: bold; color: var(--accent-orange); margin: 10px 0; }
+        .pricing-compare { color: #64748B; font-size: 0.9em; margin-top: 15px; }
 
-        .btn-buy {
-            display: inline-block;
-            background: var(--primary-color);
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
             color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            margin-top: 20px;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9em;
         }
-
-        footer { padding: 40px; text-align: center; color: #999; }
+        footer a { color: #93C5FD; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">
-            <!-- 小小 logo Nutty -->
-            <img src="https://via.placeholder.com/80/FF8C42/FFFFFF?text=N" alt="Nutty Logo"> 
-            Little<span>Candidate</span>
+    <header class="hero">
+        <div class="container">
+            <img src="nutty.png" alt="Nutty the AI Squirrel" class="hero-mascot">
+            
+            <h1>Little Candidate 小小面試生</h1>
+            <p>香港首個專為直資、私立小學而設的 AI 廣東話面試訓練 App。將高壓的面試焦慮，化作輕鬆的遊戲化學習，讓 K1-K3 孩子自信開口！</p>
+            <a href="#contact" class="btn-waitlist">🚀 2026年5月上架 - 了解更多</a>
         </div>
-        <div class="nav-links">
-            <a href="#" class="btn-trial">免費試用 7 天</a>
-        </div>
-    </nav>
+    </header>
 
-    <section class="hero">
-        <!-- 使用 Source [2] 的經典 Nutty -->
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Classic Nutty" class="nutty-main" title=" Nutty 經典造型 (來自 Source [2])">
-        <h1>讓孩子與 Nutty 一起自信面試！</h1>
-        <p>全港首創廣東話 AI 邏輯診斷，將面試壓力轉化為遊戲樂趣 [5, 6]。</p>
-        <a href="#" class="btn-buy">立即開始學習地圖</a>
-    </section>
-
-    <section class="features">
-        <div class="feature-card">
-            <!-- 使用 Source [3] 的星眼 Nutty 代表激發動力 -->
-            <img src="https://via.placeholder.com/100/FFD700/FFFFFF?text=✨" alt="Excited Nutty" class="nutty-icon">
-            <h3>100+ 遊戲關卡</h3>
-            <p>由專業老師編寫，Nutty 會陪伴孩子衝破常識與邏輯難關 [1, 7]。</p>
-        </div>
-        <div class="feature-card">
-            <!-- 使用 Source [1] 的開心 Nutty -->
-            <img src="https://via.placeholder.com/100/4A90E2/FFFFFF?text=😊" alt="Happy Nutty" class="nutty-icon">
-            <h3>AI 語音伴讀</h3>
-            <p>Nutty 擁有自然廣東話聲音，隨時進行真實對話練習 [8]。</p>
-        </div>
-        <div class="feature-card">
-            <!-- 使用 Source [6] 的戴眼鏡 Nutty 代表專業評核 -->
-            <img src="https://via.placeholder.com/100/32CD32/FFFFFF?text=🎓" alt="Smart Nutty" class="nutty-icon">
-            <h3>名校能力報告</h3>
-            <p>客觀追蹤數據，對標名校群體的邏輯表達表現 [6]。</p>
-        </div>
-    </section>
-
-    <section class="rap-section">
-        <!-- 使用 Source [4] 的 Rapping Nutty 展示營銷特色 -->
-        <img src="https://via.placeholder.com/200/FF4500/FFFFFF?text=🎤" alt="Rap Nutty" class="rap-img">
-        <div class="rap-content">
-            <h2>聽過 Nutty 的升小 Rap 嗎？</h2>
-            <p>我們用最具創意的方式，緩解家長的焦慮，讓學習變得超級酷！[9]</p>
-            <a href="#" style="color: var(--primary-color); font-weight: 700;">觀看 IG Reels 影片 &rarr;</a>
-        </div>
-    </section>
-
-    <section class="pricing">
-        <h2>透明計劃，無隱藏收費</h2>
-        <div class="price-container">
-            <div class="price-card">
-                <h3>月費計劃</h3>
-                <div style="font-size: 32px; font-weight: 900; margin: 15px 0;">HK$198</div>
-                <p>靈活體驗，隨時取消</p>
-                <a href="#" class="btn-buy" style="background: #ccc;">開始試用</a>
+    <div class="container">
+        
+        <h2 class="section-title">點解傳統面試班唔夠用？</h2>
+        <div class="grid">
+            <div class="card" style="border-top-color: #EF4444;">
+                <h3>❌ 練習頻率極低</h3>
+                <p>傳統實體面試班每星期只有 1 小時，缺乏足夠機會讓孩子練習口語表達，難以建立說話的「肌肉記憶」。</p>
             </div>
-            <div class="price-card featured">
-                <div style="background: var(--primary-color); color: white; border-radius: 10px; padding: 5px;">🔥 家長首選</div>
-                <h3>半年通行證</h3>
-                <div style="font-size: 32px; font-weight: 900; margin: 15px 0;">HK$798</div>
-                <p>涵蓋 6 個月面試衝刺期 [10]</p>
-                <a href="#" class="btn-buy">立即訂閱</a>
+            <div class="card" style="border-top-color: #EF4444;">
+                <h3>❌ 親子關係緊張</h3>
+                <p>家長在家自行操練時，孩子容易分心抗拒，高壓環境反而令小朋友害怕開口，影響面試表現。</p>
             </div>
         </div>
-    </section>
 
-    <footer>
-        <p>&copy; 2026 Little Candidate. 專為香港家庭打造的 AI 夥伴 [2]。</p>
+        <h2 class="section-title">Little Candidate 的完美方案</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>🐿️ AI 松鼠 Nutty 陪練</h3>
+                <p>透過 24/7 自然語音互動，將沉悶的模擬面試變成與可愛吉祥物 "Nutty" 的輕鬆對答，有效降低兒童的焦慮感。</p>
+            </div>
+            <div class="card">
+                <h3>🗣️ 專屬廣東話 NLP 引擎</h3>
+                <p>突破市面上主流 AI 的限制，精準理解香港幼稚園程度的廣東話，分析孩子的說話邏輯、反應時間及流暢度。</p>
+            </div>
+            <div class="card">
+                <h3>📚 100 個系統化關卡</h3>
+                <p>涵蓋常識、表達及情境題，為家長提供清晰、無憂的訓練路線圖，告別零碎的網絡資源。</p>
+            </div>
+            <div class="card">
+                <h3>📊 全港首創：同儕基準分析</h3>
+                <p>獨家匯聚大數據，讓家長客觀追蹤孩子與報考「同一目標名校」同儕之間的表現差距，將焦慮轉化為清晰目標。</p>
+            </div>
+        </div>
+
+        <div class="trust-section">
+            <h2 style="color: var(--primary-blue); margin-top: 0;">專業團隊把關，符合名校收生標準</h2>
+            <p>我們的題庫及 AI 評分標準，由擁有超過 10 年經驗的<strong>資深小學教師</strong>及<strong>註冊言語治療師 (Speech Therapist)</strong> 共同設計及監督，確保所有互動皆符合幼兒發展心理學及真實名校面試要求。</p>
+        </div>
+
+        <h2 class="section-title">超乎想像的性價比</h2>
+        <div class="pricing-box">
+            <h3>半年無限次通行證<br>(Half-Year Pass)</h3>
+            <div class="price">HK$ 798</div>
+            <p>完美覆蓋 6 個月的升小面試衝刺期，隨時隨地，無限次登入練習。</p>
+            <div class="pricing-compare">
+                💡 <strong>對比傳統面試班：</strong><br>
+                坊間實體面試班單堂收費已達 HK$600 - $1200。<br>
+                在 Little Candidate，<strong>一堂的價錢 ＝ 半年專屬 AI 貼身訓練！</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="contact">
+        <div class="container">
+            <p><strong>Little Candidate (小小面試生)</strong><br>致力於打造優質的 EdTech 流動應用程式</p>
+            <p>如有任何商業合作或查詢，歡迎聯絡：<br>
+            電郵：<a href="mailto:hello@littlecandidate.com">littlecandidate@gmail.com</a><br>
+            <p style="margin-top: 20px; font-size: 0.8em; opacity: 0.7;">
+                <a href="#privacy">隱私政策 (Privacy Policy)</a> | &copy; 2026 Little Candidate. All rights reserved.
+            </p>
+        </div>
     </footer>
 
 </body>
